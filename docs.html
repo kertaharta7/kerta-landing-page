@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dokumentasi Setup — Kerta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: #1e293b; background: #f8fafc; }
+
+    .layout { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+
+    /* SIDEBAR */
+    .sidebar { background: white; border-right: 1px solid #e2e8f0; padding: 24px 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+    .sidebar-logo { font-size: 16px; font-weight: 700; color: #6366f1; padding: 0 20px 20px; border-bottom: 1px solid #f1f5f9; margin-bottom: 16px; }
+    .sidebar-section { font-size: 10px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; padding: 0 20px; margin: 16px 0 6px; }
+    .sidebar a { display: block; padding: 7px 20px; font-size: 13px; color: #475569; text-decoration: none; border-left: 2px solid transparent; }
+    .sidebar a:hover { color: #6366f1; background: #f8fafc; }
+    .sidebar a.active { color: #6366f1; border-left: 2px solid #6366f1; background: #eff6ff; font-weight: 500; }
+
+    /* CONTENT */
+    .content { padding: 40px 48px; max-width: 800px; }
+    h1 { font-size: 32px; font-weight: 800; color: #1e293b; letter-spacing: -1px; margin-bottom: 8px; }
+    h2 { font-size: 20px; font-weight: 700; color: #1e293b; margin: 40px 0 12px; padding-top: 40px; border-top: 1px solid #f1f5f9; }
+    h2:first-of-type { border-top: none; padding-top: 0; margin-top: 24px; }
+    h3 { font-size: 15px; font-weight: 600; color: #1e293b; margin: 20px 0 8px; }
+    p { font-size: 14px; color: #475569; line-height: 1.8; margin-bottom: 12px; }
+    ul, ol { padding-left: 20px; margin-bottom: 12px; }
+    li { font-size: 14px; color: #475569; line-height: 1.8; margin-bottom: 4px; }
+    .lead { font-size: 16px; color: #64748b; line-height: 1.7; margin-bottom: 24px; }
+
+    /* CODE */
+    code { background: #f1f5f9; color: #6366f1; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: monospace; }
+    pre { background: #1e293b; color: #e2e8f0; padding: 16px 20px; border-radius: 10px; font-size: 13px; font-family: monospace; line-height: 1.6; margin: 12px 0; overflow-x: auto; }
+
+    /* CALLOUT */
+    .callout { padding: 14px 16px; border-radius: 10px; margin: 16px 0; font-size: 13px; line-height: 1.6; }
+    .callout-info { background: #eff6ff; border-left: 3px solid #3b82f6; color: #1e40af; }
+    .callout-warning { background: #fff7ed; border-left: 3px solid #f59e0b; color: #92400e; }
+    .callout-success { background: #dcfce7; border-left: 3px solid #16a34a; color: #14532d; }
+
+    /* STEP */
+    .step { display: flex; gap: 14px; margin-bottom: 16px; }
+    .step-num { width: 28px; height: 28px; background: #6366f1; color: white; border-radius: 50%; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .step-content { flex: 1; }
+    .step-title { font-size: 14px; font-weight: 600; color: #1e293b; margin-bottom: 4px; }
+    .step-desc { font-size: 13px; color: #64748b; line-height: 1.6; }
+
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+    th { background: #f8fafc; padding: 10px 12px; text-align: left; font-weight: 600; color: #475569; border-bottom: 1px solid #e2e8f0; }
+    td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #475569; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .content { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-logo">◈ Kerta Docs</div>
+
+    <div class="sidebar-section">Mulai</div>
+    <a href="#pengantar" class="active">Pengantar</a>
+    <a href="#persyaratan">Persyaratan</a>
+
+    <div class="sidebar-section">Setup</div>
+    <a href="#firebase">1. Setup Firebase</a>
+    <a href="#kode">2. Konfigurasi Kode</a>
+    <a href="#deploy">3. Deploy ke GitHub Pages</a>
+
+    <div class="sidebar-section">Penggunaan</div>
+    <a href="#login">Login & Akun</a>
+    <a href="#transaksi">Transaksi</a>
+    <a href="#anggaran">Anggaran</a>
+    <a href="#fitur-lain">Fitur Lainnya</a>
+
+    <div class="sidebar-section">Lainnya</div>
+    <a href="#faq">FAQ</a>
+    <a href="#support">Support</a>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <h1>Dokumentasi Kerta</h1>
+    <p class="lead">Panduan lengkap setup dan penggunaan aplikasi keuangan keluarga Kerta dari nol hingga siap pakai.</p>
+
+    <div class="callout callout-success">
+      ✅ Estimasi waktu setup: <strong>15–30 menit</strong>. Tidak perlu keahlian coding khusus.
+    </div>
+
+    <!-- PENGANTAR -->
+    <h2 id="pengantar">Pengantar</h2>
+    <p>Kerta adalah aplikasi keuangan keluarga berbasis web yang dibangun menggunakan HTML, CSS, dan JavaScript murni — tanpa framework yang rumit. Data tersimpan di Firebase Realtime Database milikmu sendiri, sehingga privasi dan keamanan data sepenuhnya ada di tanganmu.</p>
+
+    <h3>Yang kamu dapatkan</h3>
+    <ul>
+      <li>Source code lengkap (3 file: <code>index.html</code>, <code>style.css</code>, <code>app.js</code>)</li>
+      <li>Dokumentasi setup ini</li>
+      <li>Support via WhatsApp selama 30 hari</li>
+    </ul>
+
+    <!-- PERSYARATAN -->
+    <h2 id="persyaratan">Persyaratan</h2>
+    <p>Sebelum memulai, pastikan kamu sudah punya:</p>
+
+    <table>
+      <tr><th>Yang Dibutuhkan</th><th>Keterangan</th><th>Biaya</th></tr>
+      <tr><td>Akun Google</td><td>Untuk Firebase dan GitHub</td><td>Gratis</td></tr>
+      <tr><td>Akun GitHub</td><td>Untuk hosting aplikasi</td><td>Gratis</td></tr>
+      <tr><td>Akun Firebase</td><td>Untuk database dan login</td><td>Gratis</td></tr>
+      <tr><td>Browser modern</td><td>Chrome, Edge, Firefox</td><td>Gratis</td></tr>
+    </table>
+
+    <div class="callout callout-info">
+      💡 Semua layanan yang digunakan <strong>100% gratis</strong>. Tidak ada biaya hosting atau database selama pemakaian normal.
+    </div>
+
+    <!-- FIREBASE -->
+    <h2 id="firebase">1. Setup Firebase</h2>
+    <p>Firebase adalah layanan dari Google yang menyediakan database dan autentikasi untuk aplikasi Kerta.</p>
+
+    <h3>Buat Project Firebase</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Buka Firebase Console</div>
+        <div class="step-desc">Kunjungi <code>console.firebase.google.com</code> dan login dengan akun Google.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Buat project baru</div>
+        <div class="step-desc">Klik <strong>Create a project</strong> → isi nama project (contoh: <code>kerta-keluarga</code>) → disable Google Analytics → klik <strong>Create project</strong>.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Buat Realtime Database</div>
+        <div class="step-desc">Di menu kiri klik <strong>Build → Realtime Database → Create Database</strong>. Pilih lokasi <strong>Singapore</strong>. Pilih <strong>Start in test mode</strong> → Enable.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Aktifkan Authentication</div>
+        <div class="step-desc">Klik <strong>Build → Authentication → Get started → Email/Password → Enable → Save</strong>.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <div class="step-title">Tambah user</div>
+        <div class="step-desc">Di tab <strong>Users → Add user</strong>. Masukkan email dan password untuk setiap anggota keluarga yang akan menggunakan aplikasi.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <div class="step-title">Ambil konfigurasi</div>
+        <div class="step-desc">Klik ikon ⚙️ → <strong>Project settings → Your apps → klik ikon Web (&lt;/&gt;)</strong>. Isi nama app → Register app. Salin kode <code>firebaseConfig</code> yang muncul.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-content">
+        <div class="step-title">Update Firebase Rules</div>
+        <div class="step-desc">Di Realtime Database → tab <strong>Rules</strong>, ganti isinya dengan:</div>
+      </div>
+    </div>
+    <pre>{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}</pre>
+    <p>Klik <strong>Publish</strong>.</p>
+
+    <!-- KODE -->
+    <h2 id="kode">2. Konfigurasi Kode</h2>
+    <p>Setelah Firebase siap, masukkan konfigurasi ke dalam file <code>app.js</code>.</p>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Buka file app.js</div>
+        <div class="step-desc">Buka file <code>app.js</code> menggunakan VS Code atau editor teks lainnya.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Ganti firebaseConfig</div>
+        <div class="step-desc">Cari bagian <code>const firebaseConfig</code> di baris paling atas, ganti seluruh isinya dengan konfigurasi dari Firebase Console kamu:</div>
+      </div>
+    </div>
+    <pre>const firebaseConfig = {
+  apiKey: "ISI_DENGAN_API_KEY_KAMU",
+  authDomain: "NAMA_PROJECT.firebaseapp.com",
+  databaseURL: "https://NAMA_PROJECT-default-rtdb.REGION.firebasedatabase.app",
+  projectId: "NAMA_PROJECT",
+  storageBucket: "NAMA_PROJECT.firebasestorage.app",
+  messagingSenderId: "ANGKA_ID_KAMU",
+  appId: "APP_ID_KAMU"
+};</pre>
+
+    <div class="callout callout-warning">
+      ⚠️ Jangan bagikan <code>firebaseConfig</code> ke orang lain. Simpan dengan aman.
+    </div>
+
+    <!-- DEPLOY -->
+    <h2 id="deploy">3. Deploy ke GitHub Pages</h2>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Buat repository GitHub</div>
+        <div class="step-desc">Buka <code>github.com</code> → klik <strong>+</strong> → <strong>New repository</strong>. Beri nama (contoh: <code>kerta-app</code>) → pilih <strong>Public</strong> → Create.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Upload file</div>
+        <div class="step-desc">Di halaman repository, klik <strong>uploading an existing file</strong>. Drag & drop ketiga file (<code>index.html</code>, <code>style.css</code>, <code>app.js</code>) → klik <strong>Commit changes</strong>.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Aktifkan GitHub Pages</div>
+        <div class="step-desc">Klik tab <strong>Settings → Pages → Branch: main → Save</strong>. Tunggu 2 menit.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Buka aplikasi</div>
+        <div class="step-desc">Aplikasi bisa diakses di: <code>https://usernamegithub.github.io/nama-repository</code></div>
+      </div>
+    </div>
+
+    <div class="callout callout-success">
+      🎉 Selesai! Aplikasi Kerta sudah online dan bisa diakses dari HP maupun laptop.
+    </div>
+
+    <!-- LOGIN -->
+    <h2 id="login">Login & Akun</h2>
+    <p>Gunakan email dan password yang sudah didaftarkan di Firebase Authentication untuk login. Kamu bisa tambah anggota keluarga dengan menambahkan user baru di Firebase Console → Authentication → Users → Add user.</p>
+
+    <!-- TRANSAKSI -->
+    <h2 id="transaksi">Transaksi</h2>
+    <p>Buka tab <strong>Transaksi</strong> untuk mencatat pemasukan, pengeluaran, atau transfer antar rekening.</p>
+    <ul>
+      <li><strong>Pemasukan</strong> — gaji, usaha, investasi, dll</li>
+      <li><strong>Pengeluaran</strong> — belanja, tagihan, makan, dll</li>
+      <li><strong>Transfer</strong> — pindah saldo antar rekening/dompet</li>
+    </ul>
+    <p>Gunakan filter <strong>Semua / Per Bulan / Rentang / Tanggal</strong> untuk melihat transaksi berdasarkan periode tertentu.</p>
+
+    <!-- ANGGARAN -->
+    <h2 id="anggaran">Anggaran</h2>
+    <p>Buka tab <strong>Anggaran</strong> untuk set batas pengeluaran per kategori tiap bulan. Anggaran akan otomatis reset di awal bulan baru. Warna progress bar:</p>
+    <ul>
+      <li>🟢 <strong>Hijau</strong> — masih aman (di bawah 80%)</li>
+      <li>🟡 <strong>Kuning</strong> — hampir habis (80–99%)</li>
+      <li>🔴 <strong>Merah</strong> — melebihi batas</li>
+    </ul>
+
+    <!-- FITUR LAIN -->
+    <h2 id="fitur-lain">Fitur Lainnya</h2>
+    <table>
+      <tr><th>Fitur</th><th>Cara Akses</th></tr>
+      <tr><td>Hutang & Piutang</td><td>Tab Hutang & Piutang</td></tr>
+      <tr><td>Target Keuangan</td><td>Tab Target</td></tr>
+      <tr><td>Grafik</td><td>Tab Grafik</td></tr>
+      <tr><td>Custom Kategori & Bank</td><td>Tab ⚙️ Pengaturan</td></tr>
+      <tr><td>Export Excel</td><td>Menu ⋯ → Export Excel</td></tr>
+      <tr><td>Laporan PDF</td><td>Menu ⋯ → Laporan PDF</td></tr>
+      <tr><td>Backup Data</td><td>Menu ⋯ → Backup</td></tr>
+      <tr><td>Restore Data</td><td>Menu ⋯ → Restore</td></tr>
+      <tr><td>Notifikasi</td><td>Menu ⋯ → Aktifkan Notifikasi</td></tr>
+    </table>
+
+    <!-- FAQ -->
+    <h2 id="faq">FAQ</h2>
+
+    <h3>Apakah data saya aman?</h3>
+    <p>Ya. Data tersimpan di Firebase milikmu sendiri — bukan di server pihak ketiga. Hanya user yang login yang bisa mengakses data.</p>
+
+    <h3>Apakah bisa dipakai offline?</h3>
+    <p>Tidak sepenuhnya. Aplikasi butuh koneksi internet untuk sinkronisasi data dengan Firebase. Namun data yang sudah dimuat akan tetap terlihat sementara meski koneksi terputus.</p>
+
+    <h3>Berapa banyak user yang bisa login?</h3>
+    <p>Tidak terbatas. Firebase gratis mendukung hingga ribuan user. Untuk keluarga, cukup tambahkan email setiap anggota di Firebase Authentication.</p>
+
+    <h3>Apakah bisa ganti nama aplikasi?</h3>
+    <p>Bisa. Cari dan ganti semua teks "Kerta" dan simbol "◈" di file <code>index.html</code> dan <code>app.js</code> dengan nama yang kamu inginkan.</p>
+
+    <h3>Bagaimana kalau ada error?</h3>
+    <p>Buka browser → klik kanan → <strong>Inspect → Console</strong>. Screenshot pesan error dan kirim ke support.</p>
+
+    <!-- SUPPORT -->
+    <h2 id="support">Support</h2>
+    <p>Butuh bantuan? Hubungi via WhatsApp dalam 30 hari setelah pembelian. Sertakan:</p>
+    <ul>
+      <li>Screenshot error (kalau ada)</li>
+      <li>Langkah yang sudah dilakukan</li>
+      <li>Browser dan perangkat yang digunakan</li>
+    </ul>
+
+    <div class="callout callout-info">
+      📱 WhatsApp Support: <strong>[Nomor WA kamu]</strong><br>
+      ⏰ Waktu respon: 1×24 jam di hari kerja
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
