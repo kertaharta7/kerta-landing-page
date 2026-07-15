@@ -1,252 +1,411 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kerta — Cerdas Kelola Keuangan Kamu</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; color: #1e293b; background: white; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kerta — Bukan Sekadar Mencatat. Pahami Ke Mana Uangmu Pergi.</title>
+<meta name="description" content="Kerta membantu kamu memahami kondisi keuangan keluarga — pola pengeluaran, target, dan kewajiban — supaya keputusan finansial bisa diambil dengan lebih percaya diri." />
 
-    /* NAV */
-    nav { position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #f1f5f9; padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; z-index: 100; }
-    .nav-logo { font-size: 18px; font-weight: 700; color: #6366f1; letter-spacing: -0.5px; }
-    .nav-links { display: flex; gap: 24px; align-items: center; }
-    .nav-links a { font-size: 14px; color: #64748b; text-decoration: none; font-weight: 500; }
-    .nav-links a:hover { color: #6366f1; }
-    .btn-coba { background: #6366f1; color: white !important; padding: 8px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
-    .btn-coba:hover { background: #4f46e5 !important; }
+<!-- Open Graph: wajib supaya link ini tampil bagus saat dibagikan ke WA/IG -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Kerta — Bukan Sekadar Mencatat. Pahami Ke Mana Uangmu Pergi." />
+<meta property="og:description" content="Aplikasi yang membantu kamu memahami kondisi keuangan keluarga, bukan sekadar mencatat transaksi." />
+<!-- GANTI og:url dengan domain/GitHub Pages URL final -->
+<meta property="og:url" content="https://kertaharta7.github.io/kerta-landing/" />
+<meta property="og:image" content="assets/dashboard-kerta.png" />
+<meta name="twitter:card" content="summary_large_image" />
 
-    /* HERO */
-    .hero { padding: 80px 24px 60px; text-align: center; max-width: 800px; margin: 0 auto; }
-    .hero-badge { display: inline-block; background: #ede9fe; color: #6366f1; font-size: 12px; font-weight: 600; padding: 4px 14px; border-radius: 20px; margin-bottom: 20px; }
-    .hero h1 { font-size: 52px; font-weight: 800; color: #1e293b; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
-    .hero h1 span { color: #6366f1; }
-    .hero p { font-size: 18px; color: #64748b; line-height: 1.7; max-width: 560px; margin: 0 auto 36px; }
-    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn-primary { background: #6366f1; color: white; padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.15s; }
-    .btn-primary:hover { background: #4f46e5; transform: translateY(-1px); }
-    .btn-secondary { background: white; color: #1e293b; padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600; text-decoration: none; border: 1.5px solid #e2e8f0; display: inline-block; transition: all 0.15s; }
-    .btn-secondary:hover { border-color: #6366f1; color: #6366f1; }
+<!-- GANTI dengan favicon asli KERTA (32x32 / .ico) -->
+<link rel="icon" type="image/png" href="assets/favicon.png" />
 
-    /* STATS */
-    .stats { background: #f8fafc; padding: 40px 24px; }
-    .stats-inner { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: center; }
-    .stat-value { font-size: 36px; font-weight: 800; color: #6366f1; letter-spacing: -1px; }
-    .stat-label { font-size: 14px; color: #64748b; margin-top: 4px; }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    /* FITUR */
-    .fitur { padding: 80px 24px; max-width: 1000px; margin: 0 auto; }
-    .section-label { text-align: center; font-size: 12px; font-weight: 600; color: #6366f1; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
-    .section-title { text-align: center; font-size: 36px; font-weight: 800; color: #1e293b; letter-spacing: -1px; margin-bottom: 12px; }
-    .section-sub { text-align: center; font-size: 16px; color: #64748b; margin-bottom: 48px; }
-    .fitur-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .fitur-card { background: #f8fafc; border-radius: 16px; padding: 24px; border: 1px solid #f1f5f9; transition: all 0.2s; }
-    .fitur-card:hover { border-color: #6366f1; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(99,102,241,0.1); }
-    .fitur-icon { font-size: 28px; margin-bottom: 12px; }
-    .fitur-title { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 8px; }
-    .fitur-desc { font-size: 13px; color: #64748b; line-height: 1.6; }
+<style>
+  :root{
+    --primary:#6366f1;
+    --primary-dark:#4f46e5;
+    --text:#1e293b;
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --bg-soft:#f8fafc;
+    --radius:16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; color: var(--text); background: white; line-height: 1.6; }
+  section { scroll-margin-top: 72px; }
+  a { text-decoration: none; }
 
-    /* CARA KERJA */
-    .cara { background: #f8fafc; padding: 80px 24px; }
-    .cara-inner { max-width: 800px; margin: 0 auto; }
-    .cara-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; text-align: center; }
-    .step-num { width: 40px; height: 40px; background: #6366f1; color: white; border-radius: 50%; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
-    .step-title { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 8px; }
-    .step-desc { font-size: 13px; color: #64748b; line-height: 1.6; }
+  /* NAV */
+  nav { position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #f1f5f9; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; z-index: 100; }
+  .nav-logo { font-size: 19px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
+  .nav-links { display: flex; gap: 24px; align-items: center; }
+  .nav-links a:not(.btn-coba) { font-size: 14px; color: var(--muted); font-weight: 500; }
+  .nav-links a:not(.btn-coba):hover { color: var(--primary); }
+  .btn-coba { background: var(--primary); color: white !important; padding: 9px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; }
+  .btn-coba:hover { background: var(--primary-dark) !important; }
 
-    /* HARGA */
-    .harga { padding: 80px 24px; max-width: 600px; margin: 0 auto; text-align: center; }
-    .harga-card { background: white; border: 2px solid #6366f1; border-radius: 20px; padding: 40px; box-shadow: 0 8px 32px rgba(99,102,241,0.12); }
-    .harga-badge { display: inline-block; background: #6366f1; color: white; font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
-    .harga-nama { font-size: 20px; font-weight: 700; color: #1e293b; margin-bottom: 8px; }
-    .harga-nilai { font-size: 48px; font-weight: 800; color: #6366f1; letter-spacing: -2px; margin-bottom: 4px; }
-    .harga-sub { font-size: 14px; color: #94a3b8; margin-bottom: 28px; }
-    .harga-list { list-style: none; text-align: left; margin-bottom: 28px; display: flex; flex-direction: column; gap: 10px; }
-    .harga-list li { font-size: 14px; color: #475569; display: flex; align-items: center; gap: 8px; }
-    .harga-list li::before { content: '✓'; color: #16a34a; font-weight: 700; flex-shrink: 0; }
+  /* HERO */
+  .hero { padding: 72px 24px 40px; text-align: center; max-width: 780px; margin: 0 auto; }
+  .hero-badge { display: inline-block; background: #ede9fe; color: var(--primary); font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 20px; margin-bottom: 22px; letter-spacing: .02em; }
+  .hero h1 { font-size: 48px; font-weight: 800; line-height: 1.15; letter-spacing: -1.5px; margin-bottom: 20px; }
+  .hero h1 span { color: var(--primary); }
+  .hero p { font-size: 18px; color: var(--muted); max-width: 560px; margin: 0 auto 34px; }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; }
+  .btn-primary { background: var(--primary); color: white; padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600; display: inline-block; transition: .15s; }
+  .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+  .btn-secondary { background: white; color: var(--text); padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600; border: 1.5px solid var(--border); display: inline-block; transition: .15s; }
+  .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+  .btn-wa { background: #16a34a; color: white; padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: .15s; }
+  .btn-wa:hover { background: #15803d; transform: translateY(-1px); }
 
-    /* CTA */
-    .cta { background: #6366f1; padding: 80px 24px; text-align: center; }
-    .cta h2 { font-size: 36px; font-weight: 800; color: white; letter-spacing: -1px; margin-bottom: 12px; }
-    .cta p { font-size: 16px; color: rgba(255,255,255,0.8); margin-bottom: 32px; }
-    .btn-white { background: white; color: #6366f1; padding: 14px 32px; border-radius: 12px; font-size: 15px; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.15s; }
-    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+  /* HERO MOCKUP / SCREENSHOT PLACEHOLDER */
+  .mockup-frame { max-width: 780px; margin: 0 auto; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(15,23,42,.08); }
+  .mockup-placeholder { aspect-ratio: 16/10; background: repeating-linear-gradient(45deg, #f8fafc, #f8fafc 10px, #f1f5f9 10px, #f1f5f9 20px); border: 2px dashed #cbd5e1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #94a3b8; font-size: 14px; font-weight: 600; text-align: center; padding: 20px; }
+  .mockup-placeholder small { font-weight: 400; color: #b0bac7; font-size: 12px; }
+  .mockup-frame img { width: 100%; display: block; }
 
-    /* FOOTER */
-    footer { padding: 32px 24px; text-align: center; border-top: 1px solid #f1f5f9; }
-    footer p { font-size: 13px; color: #94a3b8; }
+  /* TRUST BAR */
+  .trust { background: var(--bg-soft); padding: 36px 24px; }
+  .trust-inner { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; text-align: center; }
+  .trust-value { font-size: 26px; font-weight: 800; color: var(--primary); letter-spacing: -.5px; }
+  .trust-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
 
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 36px; }
-      .hero p { font-size: 16px; }
-      .fitur-grid { grid-template-columns: 1fr; }
-      .cara-steps { grid-template-columns: 1fr; }
-      .stats-inner { grid-template-columns: 1fr; gap: 16px; }
-      .nav-links { display: none; }
-      .btn-coba { display: block; }
-    }
-  </style>
+  /* SECTION HEADERS */
+  .section-label { text-align: center; font-size: 12px; font-weight: 700; color: var(--primary); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px; }
+  .section-title { text-align: center; font-size: 34px; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; }
+  .section-sub { text-align: center; font-size: 16px; color: var(--muted); margin-bottom: 48px; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+  /* OUTCOME SECTION */
+  .outcome { padding: 80px 24px 40px; max-width: 1000px; margin: 0 auto; }
+  .outcome-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .outcome-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; transition: .2s; }
+  .outcome-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(99,102,241,.1); }
+  .outcome-icon { font-size: 26px; margin-bottom: 12px; }
+  .outcome-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .outcome-desc { font-size: 13px; color: var(--muted); }
+
+  /* FITUR */
+  .fitur { padding: 60px 24px 80px; max-width: 1000px; margin: 0 auto; }
+  .fitur-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .fitur-card { background: var(--bg-soft); border-radius: var(--radius); padding: 24px; border: 1px solid #f1f5f9; transition: .2s; }
+  .fitur-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(99,102,241,.1); }
+  .fitur-icon { font-size: 26px; margin-bottom: 12px; }
+  .fitur-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .fitur-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .fitur-card.foundation { background: white; border-style: dashed; }
+
+  /* CARA KERJA */
+  .cara { background: var(--bg-soft); padding: 80px 24px; }
+  .cara-inner { max-width: 800px; margin: 0 auto; }
+  .cara-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 8px; text-align: center; }
+  .step-num { width: 40px; height: 40px; background: var(--primary); color: white; border-radius: 50%; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+  .step-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .step-desc a { color: var(--primary); font-weight: 600; }
+
+  /* HARGA */
+  .harga { padding: 80px 24px; max-width: 600px; margin: 0 auto; text-align: center; }
+  .harga-card { background: white; border: 2px solid var(--primary); border-radius: 20px; padding: 40px; box-shadow: 0 8px 32px rgba(99,102,241,.12); }
+  .harga-badge { display: inline-block; background: var(--primary); color: white; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
+  .harga-nama { font-size: 19px; font-weight: 700; margin-bottom: 8px; }
+  .harga-nilai { font-size: 46px; font-weight: 800; color: var(--primary); letter-spacing: -2px; margin-bottom: 4px; }
+  .harga-sub { font-size: 14px; color: #94a3b8; margin-bottom: 28px; }
+  .harga-list { list-style: none; text-align: left; margin-bottom: 28px; display: flex; flex-direction: column; gap: 10px; }
+  .harga-list li { font-size: 14px; color: #475569; display: flex; align-items: center; gap: 8px; }
+  .harga-list li::before { content: '✓'; color: #16a34a; font-weight: 700; flex-shrink: 0; }
+  .harga-btns { display: flex; flex-direction: column; gap: 10px; }
+  .harga-note { font-size: 12px; color: #94a3b8; margin-top: 16px; }
+
+  /* FAQ */
+  .faq { padding: 0 24px 80px; max-width: 760px; margin: 0 auto; }
+  .faq-item { padding: 24px 0; border-bottom: 1px solid var(--border); }
+  .faq-item h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .faq-item p { font-size: 14px; color: var(--muted); }
+
+  /* CTA */
+  .cta { background: var(--primary); padding: 80px 24px; text-align: center; }
+  .cta h2 { font-size: 34px; font-weight: 800; color: white; letter-spacing: -1px; margin-bottom: 12px; }
+  .cta p { font-size: 16px; color: rgba(255,255,255,.85); margin-bottom: 32px; }
+  .btn-white { background: white; color: var(--primary); padding: 14px 32px; border-radius: 12px; font-size: 15px; font-weight: 700; display: inline-block; transition: .15s; }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.15); }
+
+  /* FOOTER */
+  footer { padding: 56px 24px 28px; border-top: 1px solid #f1f5f9; }
+  .footer-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 32px; }
+  .footer-brand h2 { font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 10px; }
+  .footer-brand p { font-size: 13px; color: var(--muted); max-width: 320px; }
+  .footer-links { display: flex; gap: 56px; }
+  .footer-links h4 { font-size: 13px; font-weight: 700; margin-bottom: 14px; }
+  .footer-links a { display: block; font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+  .footer-links a:hover { color: var(--primary); }
+  .copyright { text-align: center; font-size: 12px; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 24px; }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 34px; }
+    .hero p { font-size: 16px; }
+    .outcome-grid, .fitur-grid, .cara-steps { grid-template-columns: 1fr; }
+    .trust-inner { grid-template-columns: 1fr; gap: 16px; }
+    .nav-links a:not(.btn-coba) { display: none; }
+    .footer-inner { flex-direction: column; }
+    .footer-links { gap: 32px; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <span class="nav-logo">◈ Kerta</span>
-    <div class="nav-links">
-      <a href="#fitur">Fitur</a>
-      <a href="#cara">Cara Kerja</a>
-      <a href="#harga">Harga</a>
-      <a href="https://kertaharta7.github.io/kerta/" target="_blank" class="btn-coba">Coba Gratis →</a>
-    </div>
-  </nav>
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">◈ Kerta</span>
+  <div class="nav-links">
+    <a href="#paham">Apa yang Kamu Dapat</a>
+    <a href="#fitur">Fitur</a>
+    <a href="#harga">Harga</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://kertaharta7.github.io/kerta/" target="_blank" class="btn-coba">Coba Gratis →</a>
+  </div>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-badge">✦ Aplikasi Keuangan Keluarga</div>
-    <h1>Kelola Keuangan<br>Keluarga dengan <span>Cerdas</span></h1>
-    <p>Kerta membantu kamu dan keluarga mencatat pemasukan, pengeluaran, anggaran, dan target keuangan — semua dalam satu aplikasi yang mudah digunakan.</p>
-    <div class="hero-btns">
-      <a href="https://kertaharta7.github.io/kerta/" target="_blank" class="btn-primary">Coba Demo Gratis →</a>
-      <a href="#fitur" class="btn-secondary">Lihat Fitur</a>
-    </div>
-  </section>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">✦ Bukan Aplikasi Pencatat Biasa</div>
+  <h1>Bukan Sekadar Mencatat.<br>Kerta Bantu Kamu <span>Memahami</span> Uangmu.</h1>
+  <p>Lihat pola pengeluaran, pantau target, dan tahu persis kondisi keuangan keluargamu — supaya keputusan finansial diambil dengan lebih percaya diri, bukan sekadar tebak-tebakan di akhir bulan.</p>
+  <div class="hero-btns">
+    <a href="https://kertaharta7.github.io/kerta/" target="_blank" class="btn-primary">Coba Demo Gratis →</a>
+    <a href="#paham" class="btn-secondary">Lihat Apa yang Kamu Dapat</a>
+  </div>
 
-  <!-- STATS -->
-  <div class="stats">
-    <div class="stats-inner">
+  <div class="mockup-frame">
+    <img src="assets/dashboard-kerta.png" alt="Dashboard KERTA — grafik perkembangan saldo, pemasukan, pengeluaran, dan sisa anggaran bulan ini" loading="lazy">
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="trust-inner">
+    <div>
+      <div class="trust-value">Rp0</div>
+      <div class="trust-label">Biaya langganan per bulan</div>
+    </div>
+    <div>
+      <div class="trust-value">Sekali Bayar</div>
+      <div class="trust-label">Pakai selamanya, update gratis</div>
+    </div>
+    <div>
+      <div class="trust-value">100% Milikmu</div>
+      <div class="trust-label">Data tersimpan di Firebase kamu sendiri</div>
+    </div>
+  </div>
+</div>
+
+<!-- OUTCOME SECTION -->
+<section class="outcome" id="paham">
+  <div class="section-label">Bukan Sekadar Fitur</div>
+  <div class="section-title">Apa yang Akan Kamu Pahami dengan Kerta</div>
+  <p class="section-sub">Kerta dibangun untuk menjawab pertanyaan yang sebenarnya ada di kepalamu — bukan cuma menyimpan angka.</p>
+  <div class="outcome-grid">
+    <div class="outcome-card">
+      <div class="outcome-icon">📊</div>
+      <div class="outcome-title">Ke mana uangmu pergi</div>
+      <div class="outcome-desc">Lihat pola pengeluaran bulanan secara jelas, bukan cuma daftar transaksi yang panjang.</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-icon">🎯</div>
+      <div class="outcome-title">Apakah targetmu sesuai rencana</div>
+      <div class="outcome-desc">Pantau progress dana darurat, umroh, atau target lain — tahu persis apakah kamu di jalur yang benar.</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-icon">💳</div>
+      <div class="outcome-title">Berapa kewajiban yang tersisa</div>
+      <div class="outcome-desc">Hutang dan cicilan yang masih berjalan, terlihat jelas tanpa perlu buka banyak catatan.</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-icon">📈</div>
+      <div class="outcome-title">Kategori pengeluaran terbesar</div>
+      <div class="outcome-desc">Tahu persis di mana kebocoran terbesar terjadi setiap bulan.</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-icon">💰</div>
+      <div class="outcome-title">Berapa yang benar-benar bisa ditabung</div>
+      <div class="outcome-desc">Bukan sisa uang di akhir bulan, tapi angka yang bisa kamu rencanakan sejak awal.</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-icon">🏦</div>
+      <div class="outcome-title">Kondisi semua rekeningmu sekaligus</div>
+      <div class="outcome-desc">Cash, bank, dan e-wallet dalam satu pandangan — tidak perlu buka banyak aplikasi.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FITUR -->
+<section class="fitur" id="fitur">
+  <div class="section-label">Fitur Lengkap</div>
+  <div class="section-title">Yang Membuat Insight di Atas Bisa Terjadi</div>
+  <p class="section-sub">Semua outcome di atas ditenagai oleh fitur-fitur ini.</p>
+  <div class="fitur-grid">
+    <div class="fitur-card">
+      <div class="fitur-icon">📊</div>
+      <div class="fitur-title">Grafik & Insight</div>
+      <div class="fitur-desc">Visualisasi keuangan dengan grafik interaktif, lengkap dengan insight otomatis tren pengeluaran.</div>
+    </div>
+    <div class="fitur-card">
+      <div class="fitur-icon">🎯</div>
+      <div class="fitur-title">Anggaran Bulanan</div>
+      <div class="fitur-desc">Set batas anggaran per kategori. Dapat peringatan otomatis kalau anggaran hampir habis.</div>
+    </div>
+    <div class="fitur-card">
+      <div class="fitur-icon">🕌</div>
+      <div class="fitur-title">Target Keuangan</div>
+      <div class="fitur-desc">Set target seperti dana umroh atau beli rumah. Pantau progress dan deadline pencapaiannya.</div>
+    </div>
+    <div class="fitur-card">
+      <div class="fitur-icon">🏦</div>
+      <div class="fitur-title">Multi Rekening</div>
+      <div class="fitur-desc">Kelola saldo Cash, Bank, dan E-Wallet dalam satu dashboard. Transfer antar rekening tercatat otomatis.</div>
+    </div>
+    <div class="fitur-card">
+      <div class="fitur-icon">💳</div>
+      <div class="fitur-title">Hutang & Piutang</div>
+      <div class="fitur-desc">Catat hutang dan piutang dengan fitur cicilan. Progress bar menunjukkan berapa yang sudah dibayar.</div>
+    </div>
+    <div class="fitur-card">
+      <div class="fitur-icon">📄</div>
+      <div class="fitur-title">Laporan PDF</div>
+      <div class="fitur-desc">Generate laporan keuangan bulanan dalam format PDF, lengkap dengan ringkasan dan riwayat transaksi.</div>
+    </div>
+    <div class="fitur-card">
+      <div class="fitur-icon">🔔</div>
+      <div class="fitur-title">Notifikasi Otomatis</div>
+      <div class="fitur-desc">Dapat notifikasi browser saat anggaran hampir habis atau target mendekati deadline.</div>
+    </div>
+    <div class="fitur-card">
+      <div class="fitur-icon">💾</div>
+      <div class="fitur-title">Backup & Restore</div>
+      <div class="fitur-desc">Backup semua data ke file JSON dengan satu klik. Restore kapan saja kalau diperlukan.</div>
+    </div>
+    <div class="fitur-card foundation">
+      <div class="fitur-icon">💰</div>
+      <div class="fitur-title">Catat Transaksi</div>
+      <div class="fitur-desc">Fondasi dari semua insight di atas — catat pemasukan dan pengeluaran harian dengan cepat, lengkap kategori dan metode pembayaran.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CARA KERJA -->
+<section class="cara" id="cara">
+  <div class="cara-inner">
+    <div class="section-label">Cara Kerja</div>
+    <div class="section-title">Mulai dalam 3 Langkah</div>
+    <p class="section-sub" style="margin-bottom:0">Setup mudah, langsung bisa dipakai.</p>
+    <div class="cara-steps">
       <div>
-        <div class="stat-value">10+</div>
-        <div class="stat-label">Fitur lengkap</div>
+        <div class="step-num">1</div>
+        <div class="step-title">Beli & Download</div>
+        <div class="step-desc">Beli source code Kerta dan download semua file yang diperlukan.</div>
       </div>
       <div>
-        <div class="stat-value">100%</div>
-        <div class="stat-label">Data real-time</div>
+        <div class="step-num">2</div>
+        <div class="step-title">Setup Firebase</div>
+        <div class="step-desc">Buat project Firebase gratis dan hubungkan dengan aplikasi. Ikuti <a href="docs.html">panduan setup lengkap</a> yang sudah disediakan.</div>
       </div>
       <div>
-        <div class="stat-value">Free</div>
-        <div class="stat-label">Setup Firebase gratis</div>
+        <div class="step-num">3</div>
+        <div class="step-title">Deploy & Pakai</div>
+        <div class="step-desc">Upload ke GitHub Pages dan aplikasi langsung online. Bisa diakses dari HP maupun laptop.</div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- FITUR -->
-  <section class="fitur" id="fitur">
-    <div class="section-label">Fitur Unggulan</div>
-    <div class="section-title">Semua yang kamu butuhkan</div>
-    <div class="section-sub">Dari pencatatan transaksi harian hingga laporan bulanan PDF — semua ada di Kerta.</div>
-    <div class="fitur-grid">
-      <div class="fitur-card">
-        <div class="fitur-icon">💰</div>
-        <div class="fitur-title">Catat Transaksi</div>
-        <div class="fitur-desc">Catat pemasukan dan pengeluaran harian dengan mudah. Lengkap dengan kategori, metode pembayaran, dan filter pencarian.</div>
+<!-- HARGA -->
+<section class="harga" id="harga">
+  <div class="section-label">Harga</div>
+  <div class="section-title">Investasi Sekali, Pakai Selamanya</div>
+  <p class="section-sub" style="margin-bottom:40px">Tidak ada biaya langganan bulanan.</p>
+  <div class="harga-card">
+    <div class="harga-badge">Source Code Template</div>
+    <div class="harga-nama">Kerta — Dashboard Keuangan Keluarga</div>
+    <div class="harga-nilai">Rp 199rb</div>
+    <div class="harga-sub">Bayar sekali, milik selamanya</div>
+    <ul class="harga-list">
+      <li>Source code lengkap (HTML, CSS, JS)</li>
+      <li>Dokumentasi setup lengkap</li>
+      <li>Koneksi Firebase Realtime Database</li>
+      <li>Login & keamanan data</li>
+      <li>Semua fitur termasuk laporan PDF</li>
+      <li>Update gratis</li>
+      <li>Support via WhatsApp</li>
+    </ul>
+    <div class="harga-btns">
+      <a href="http://lynk.id/kertaharta/g1l7dr1eggm9" class="btn-primary" style="text-align:center">Beli Sekarang →</a>
+      <a href="https://wa.me/6285158488969?text=Halo%2C%20saya%20mau%20tanya%20tentang%20Kerta" target="_blank" class="btn-wa" style="justify-content:center">💬 Tanya Dulu via WhatsApp</a>
+    </div>
+    <p class="harga-note">Belum yakin? Coba demo gratisnya dulu di atas.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-label">FAQ</div>
+  <div class="section-title" style="margin-bottom:8px">Pertanyaan yang Sering Ditanyakan</div>
+  <p class="section-sub">Beberapa hal yang biasanya ditanyakan sebelum menggunakan Kerta.</p>
+  <div class="faq-item">
+    <h3>Apakah Kerta gratis?</h3>
+    <p>Demo dapat dicoba secara gratis. Versi lengkap (source code) dibeli sekali dan digunakan selamanya.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Apakah data saya aman?</h3>
+    <p>Ya. Data tersimpan di Firebase milikmu sendiri, jadi kamu punya kontrol penuh atas data keuanganmu.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Apakah bisa digunakan di HP?</h3>
+    <p>Bisa. Kerta dirancang agar nyaman digunakan di desktop maupun smartphone.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Saya bukan orang teknis, apakah tetap bisa setup?</h3>
+    <p>Bisa. Setiap pembelian dilengkapi panduan setup langkah demi langkah, dan kamu bisa tanya langsung via WhatsApp kalau ada kendala.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Coba Dulu, Gratis</h2>
+  <p>Lihat sendiri bagaimana Kerta membantu kamu memahami kondisi keuangan keluarga.</p>
+  <a href="https://kertaharta7.github.io/kerta/" target="_blank" class="btn-white">Buka Demo Kerta →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h2>◈ Kerta</h2>
+      <p>Bantu kamu memahami ke mana uangmu pergi. Kelola keuangan keluarga dengan lebih sadar, bukan sekadar mencatat transaksi.</p>
+    </div>
+    <div class="footer-links">
+      <div>
+        <h4>Produk</h4>
+        <a href="#fitur">Fitur</a>
+        <a href="#harga">Harga</a>
+        <a href="https://kertaharta7.github.io/kerta/" target="_blank">Demo</a>
       </div>
-      <div class="fitur-card">
-        <div class="fitur-icon">🎯</div>
-        <div class="fitur-title">Anggaran Bulanan</div>
-        <div class="fitur-desc">Set batas anggaran per kategori tiap bulan. Dapat peringatan otomatis kalau anggaran hampir habis.</div>
+      <div>
+        <h4>Bantuan</h4>
+        <a href="#faq">FAQ</a>
+        <a href="mailto:kertaharta@gmail.com">Kontak</a>
+        <a href="http://lynk.id/kertaharta/g1l7dr1eggm9">Beli</a>
       </div>
-      <div class="fitur-card">
-        <div class="fitur-icon">📊</div>
-        <div class="fitur-title">Grafik & Insight</div>
-        <div class="fitur-desc">Visualisasi keuangan dengan grafik interaktif. Insight otomatis memberi tahu tren pengeluaran kamu.</div>
-      </div>
-      <div class="fitur-card">
-        <div class="fitur-icon">🏦</div>
-        <div class="fitur-title">Multi Rekening</div>
-        <div class="fitur-desc">Kelola saldo Cash, BNI, BSI, DANA, OVO, dan lainnya dalam satu dashboard. Transfer antar rekening tercatat otomatis.</div>
-      </div>
-      <div class="fitur-card">
-        <div class="fitur-icon">💳</div>
-        <div class="fitur-title">Hutang & Piutang</div>
-        <div class="fitur-desc">Catat hutang dan piutang dengan fitur cicilan. Progress bar menunjukkan berapa yang sudah dibayar.</div>
-      </div>
-      <div class="fitur-card">
-        <div class="fitur-icon">🕌</div>
-        <div class="fitur-title">Target Keuangan</div>
-        <div class="fitur-desc">Set target keuangan seperti dana umroh atau beli rumah. Pantau progress dan deadline pencapaiannya.</div>
-      </div>
-      <div class="fitur-card">
-        <div class="fitur-icon">📄</div>
-        <div class="fitur-title">Laporan PDF</div>
-        <div class="fitur-desc">Generate laporan keuangan bulanan dalam format PDF. Lengkap dengan ringkasan, anggaran, dan riwayat transaksi.</div>
-      </div>
-      <div class="fitur-card">
-        <div class="fitur-icon">🔔</div>
-        <div class="fitur-title">Notifikasi Otomatis</div>
-        <div class="fitur-desc">Dapat notifikasi browser kalau anggaran hampir habis atau target mendekati deadline.</div>
-      </div>
-      <div class="fitur-card">
-        <div class="fitur-icon">💾</div>
-        <div class="fitur-title">Backup & Restore</div>
-        <div class="fitur-desc">Backup semua data ke file JSON dengan satu klik. Restore kapan saja kalau diperlukan.</div>
+      <div>
+        <h4>Ikuti Kerta</h4>
+        <a href="https://instagram.com/kerta.harta" target="_blank">Instagram</a>
+        <!-- Threads/TikTok sengaja belum ditaruh — tambahkan begitu akun aktif, hindari dead link -->
       </div>
     </div>
-  </section>
-
-  <!-- CARA KERJA -->
-  <section class="cara" id="cara">
-    <div class="cara-inner">
-      <div class="section-label">Cara Kerja</div>
-      <div class="section-title">Mulai dalam 3 langkah</div>
-      <div class="section-sub">Setup mudah, langsung bisa dipakai</div>
-      <div class="cara-steps">
-        <div>
-          <div class="step-num">1</div>
-          <div class="step-title">Beli & Download</div>
-          <div class="step-desc">Beli source code Kerta dan download semua file yang diperlukan.</div>
-        </div>
-        <div>
-          <div class="step-num">2</div>
-          <div class="step-title">Setup Firebase</div>
-          <div class="step-desc">Buat project Firebase gratis dan hubungkan dengan aplikasi. Ikuti <a href="docs.html" style="color:#6366f1;font-weight:600;">panduan setup lengkap</a> yang sudah disediakan.</div>
-        </div>
-        <div>
-          <div class="step-num">3</div>
-          <div class="step-title">Deploy & Pakai</div>
-          <div class="step-desc">Upload ke GitHub Pages dan aplikasi langsung online. Bisa diakses dari HP maupun laptop.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HARGA -->
-  <section class="harga" id="harga">
-    <div class="section-label">Harga</div>
-    <div class="section-title">Investasi sekali, pakai selamanya</div>
-    <div class="section-sub" style="margin-bottom:40px">Tidak ada biaya langganan</div>
-    <div class="harga-card">
-      <div class="harga-badge">Source Code Template</div>
-      <div class="harga-nama">Kerta — Aplikasi Keuangan Keluarga</div>
-      <div class="harga-nilai">Rp 199rb</div>
-      <div class="harga-sub">Bayar sekali, milik selamanya</div>
-      <ul class="harga-list">
-        <li>Source code lengkap (HTML, CSS, JS)</li>
-        <li>Dokumentasi setup lengkap</li>
-        <li>Koneksi Firebase Realtime Database</li>
-        <li>Login & keamanan data</li>
-        <li>Semua fitur termasuk laporan PDF</li>
-        <li>Update gratis</li>
-        <li>Support via WhatsApp</li>
-      </ul>
-      <a href="http://lynk.id/kertaharta/g1l7dr1eggm9" class="btn-primary" style="display:block;text-align:center;font-size:15px;padding:14px">Beli Sekarang →</a>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta">
-    <h2>Coba dulu, gratis!</h2>
-    <p>Lihat sendiri bagaimana Kerta membantu kelola keuangan keluargamu.</p>
-    <a href="https://kertaharta7.github.io/kerta/" target="_blank" class="btn-white">Buka Demo Kerta →</a>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>◈ Kerta · Dibuat dengan ❤️ untuk keluarga Indonesia</p>
-  </footer>
+  </div>
+  <div class="copyright">© 2026 Kerta. Dibuat untuk membantu keluarga Indonesia memahami dan mengelola keuangan dengan lebih baik.</div>
+</footer>
 
 </body>
 </html>
